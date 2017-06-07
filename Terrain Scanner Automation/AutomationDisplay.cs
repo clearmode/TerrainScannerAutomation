@@ -59,11 +59,6 @@ namespace Terrain_Scanner_Automation
 
             base.WndProc(ref m);
         }
-
-        private void btnSetProcessID_Click(object sender, EventArgs e)
-        {
-            _auto.MinecraftProcessID = Int32.Parse(tbProcessID.Text);
-        }
         
     }
 }
