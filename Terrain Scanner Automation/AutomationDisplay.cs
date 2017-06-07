@@ -42,7 +42,7 @@ namespace Terrain_Scanner_Automation
             btnEast.Enabled = false;
             btnSouth.Enabled = false;
             btnWest.Enabled = false;
-
+            /*
             dgvChunkQueue.RowHeadersVisible = false;
             dgvChunkQueue.AutoGenerateColumns = false;
             dgvChunkQueue.DataSource = ChunkList.Chunks;
@@ -59,7 +59,7 @@ namespace Terrain_Scanner_Automation
                 Width = 50,
                 DataPropertyName = "Z"
             });
-
+            */
         }
 
         private void Form1_Load(object sender, EventArgs e)
