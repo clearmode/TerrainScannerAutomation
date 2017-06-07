@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Terrain_Scanner_Automation
 {
@@ -26,11 +24,11 @@ namespace Terrain_Scanner_Automation
             }
         }
 
-        static List<Chunk> Chunks;
+        public static BindingList<Chunk> Chunks;
 
         static ChunkList()
         {
-            Chunks = new List<Chunk>();
+            Chunks = new BindingList<Chunk>();
         }
 
         public static Chunk AddChunk(int x, int z)

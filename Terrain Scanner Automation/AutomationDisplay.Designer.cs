@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblChunk = new System.Windows.Forms.Label();
+            this.lblChunkX = new System.Windows.Forms.Label();
             this.btnNorth = new System.Windows.Forms.Button();
             this.btnEast = new System.Windows.Forms.Button();
             this.btnSouth = new System.Windows.Forms.Button();
@@ -39,6 +39,13 @@
             this.btnSetStartChunk = new System.Windows.Forms.Button();
             this.tbStartChunk = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.dgvChunkQueue = new System.Windows.Forms.DataGridView();
+            this.btnRemoveChunk = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblChunkZ = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChunkQueue)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -53,7 +60,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(255, 9);
+            this.label2.Location = new System.Drawing.Point(200, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 1;
@@ -62,24 +69,24 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(122, 112);
+            this.label3.Location = new System.Drawing.Point(93, 92);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Current Chunk:";
+            this.label3.Text = "Current Chunk";
             // 
-            // lblChunk
+            // lblChunkX
             // 
-            this.lblChunk.AutoSize = true;
-            this.lblChunk.Location = new System.Drawing.Point(206, 112);
-            this.lblChunk.Name = "lblChunk";
-            this.lblChunk.Size = new System.Drawing.Size(25, 13);
-            this.lblChunk.TabIndex = 3;
-            this.lblChunk.Text = "0, 0";
+            this.lblChunkX.AutoSize = true;
+            this.lblChunkX.Location = new System.Drawing.Point(114, 107);
+            this.lblChunkX.Name = "lblChunkX";
+            this.lblChunkX.Size = new System.Drawing.Size(13, 13);
+            this.lblChunkX.TabIndex = 3;
+            this.lblChunkX.Text = "0";
             // 
             // btnNorth
             // 
-            this.btnNorth.Location = new System.Drawing.Point(144, 66);
+            this.btnNorth.Location = new System.Drawing.Point(117, 66);
             this.btnNorth.Name = "btnNorth";
             this.btnNorth.Size = new System.Drawing.Size(75, 23);
             this.btnNorth.TabIndex = 4;
@@ -89,7 +96,7 @@
             // 
             // btnEast
             // 
-            this.btnEast.Location = new System.Drawing.Point(264, 107);
+            this.btnEast.Location = new System.Drawing.Point(224, 107);
             this.btnEast.Name = "btnEast";
             this.btnEast.Size = new System.Drawing.Size(75, 23);
             this.btnEast.TabIndex = 5;
@@ -99,7 +106,7 @@
             // 
             // btnSouth
             // 
-            this.btnSouth.Location = new System.Drawing.Point(144, 151);
+            this.btnSouth.Location = new System.Drawing.Point(117, 146);
             this.btnSouth.Name = "btnSouth";
             this.btnSouth.Size = new System.Drawing.Size(75, 23);
             this.btnSouth.TabIndex = 6;
@@ -143,11 +150,80 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Starting Chunk (X, Z):";
             // 
+            // dgvChunkQueue
+            // 
+            this.dgvChunkQueue.AllowUserToAddRows = false;
+            this.dgvChunkQueue.AllowUserToDeleteRows = false;
+            this.dgvChunkQueue.AllowUserToResizeColumns = false;
+            this.dgvChunkQueue.AllowUserToResizeRows = false;
+            this.dgvChunkQueue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChunkQueue.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvChunkQueue.Location = new System.Drawing.Point(96, 195);
+            this.dgvChunkQueue.MultiSelect = false;
+            this.dgvChunkQueue.Name = "dgvChunkQueue";
+            this.dgvChunkQueue.ReadOnly = true;
+            this.dgvChunkQueue.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvChunkQueue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChunkQueue.Size = new System.Drawing.Size(120, 151);
+            this.dgvChunkQueue.TabIndex = 11;
+            // 
+            // btnRemoveChunk
+            // 
+            this.btnRemoveChunk.Location = new System.Drawing.Point(85, 352);
+            this.btnRemoveChunk.Name = "btnRemoveChunk";
+            this.btnRemoveChunk.Size = new System.Drawing.Size(146, 24);
+            this.btnRemoveChunk.TabIndex = 12;
+            this.btnRemoveChunk.Text = "Remove Selected Chunk";
+            this.btnRemoveChunk.UseVisualStyleBackColor = true;
+            this.btnRemoveChunk.Click += new System.EventHandler(this.btnRemoveChunk_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(93, 107);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "X:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(93, 125);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Z:";
+            // 
+            // lblChunkZ
+            // 
+            this.lblChunkZ.AutoSize = true;
+            this.lblChunkZ.Location = new System.Drawing.Point(114, 125);
+            this.lblChunkZ.Name = "lblChunkZ";
+            this.lblChunkZ.Size = new System.Drawing.Size(13, 13);
+            this.lblChunkZ.TabIndex = 15;
+            this.lblChunkZ.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(119, 179);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Chunk Queue";
+            // 
             // AutomationDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(351, 286);
+            this.ClientSize = new System.Drawing.Size(311, 386);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblChunkZ);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnRemoveChunk);
+            this.Controls.Add(this.dgvChunkQueue);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbStartChunk);
             this.Controls.Add(this.btnSetStartChunk);
@@ -155,13 +231,14 @@
             this.Controls.Add(this.btnSouth);
             this.Controls.Add(this.btnEast);
             this.Controls.Add(this.btnNorth);
-            this.Controls.Add(this.lblChunk);
+            this.Controls.Add(this.lblChunkX);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AutomationDisplay";
             this.Text = "Terrain Scanner Automator";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChunkQueue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,7 +249,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblChunk;
+        private System.Windows.Forms.Label lblChunkX;
         private System.Windows.Forms.Button btnNorth;
         private System.Windows.Forms.Button btnEast;
         private System.Windows.Forms.Button btnSouth;
@@ -180,6 +257,12 @@
         private System.Windows.Forms.Button btnSetStartChunk;
         private System.Windows.Forms.TextBox tbStartChunk;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dgvChunkQueue;
+        private System.Windows.Forms.Button btnRemoveChunk;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblChunkZ;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -42,6 +42,24 @@ namespace Terrain_Scanner_Automation
             btnEast.Enabled = false;
             btnSouth.Enabled = false;
             btnWest.Enabled = false;
+
+            dgvChunkQueue.RowHeadersVisible = false;
+            dgvChunkQueue.AutoGenerateColumns = false;
+            dgvChunkQueue.DataSource = ChunkList.Chunks;
+            dgvChunkQueue.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "X",
+                Width = 50,
+                DataPropertyName = "X"
+            });
+
+            dgvChunkQueue.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Z",
+                Width = 50,
+                DataPropertyName = "Z"
+            });
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -106,8 +124,13 @@ namespace Terrain_Scanner_Automation
 
         private void UpdateCurrentChunkLabel()
         {
-            lblChunk.Text = currentChunk.X + ", " + currentChunk.Z;
+            lblChunkX.Text = currentChunk.X + "";
+            lblChunkZ.Text = currentChunk.Z + "";
         }
-        
+
+        private void btnRemoveChunk_Click(object sender, EventArgs e)
+        {
+            ChunkList.Chunks.RemoveAt(dgvChunkQueue.CurrentCell.RowIndex);
+        }
     }
 }
