@@ -13,23 +13,7 @@ namespace Terrain_Scanner_Automation
 {
     public class Automator
     {
-
-        private int _minecraftProcessID;
-        public int MinecraftProcessID
-        {
-            get
-            {
-                return _minecraftProcessID;
-            }
-
-            set
-            {
-                _minecraftProcessID = value;
-                _minecraftProcess = Process.GetProcessById(_minecraftProcessID);
-            }
-        }
-
-        Process _minecraftProcess;
+        
         Thread _run;
         InputSimulator _input;
         

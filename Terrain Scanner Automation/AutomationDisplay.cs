@@ -46,7 +46,7 @@ namespace Terrain_Scanner_Automation
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == 0x0312 && m.WParam.ToInt32() == START_HOTKEY_ID && _auto.MinecraftProcessID != 0)
+            if (m.Msg == 0x0312 && m.WParam.ToInt32() == START_HOTKEY_ID /*&& _auto.MinecraftProcessID != 0*/)
             {
                 Console.WriteLine("Start");
                 _auto.Running = true;
