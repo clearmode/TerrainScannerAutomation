@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.InteropServices;
+using WindowsInput;
 
 namespace Terrain_Scanner_Automation
 {
@@ -30,14 +31,29 @@ namespace Terrain_Scanner_Automation
         [DllImport("user32.dll")]
         static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
 
-        public int MinecraftProcessID { get; set; }
+        private int _minecraftProcessID;
+        public int MinecraftProcessID
+        {
+            get
+            {
+                return _minecraftProcessID;
+            }
+
+            set
+            {
+                _minecraftProcessID = value;
+                _minecraftProcess = Process.GetProcessById(_minecraftProcessID);
+            }
+        }
 
         Process _minecraftProcess;
         Thread _run;
+        InputSimulator _input;
+        
 
         public Automator()
         {
-            _minecraftProcess = Process.GetProcessById(MinecraftProcessID);
+            _input = new InputSimulator();
         }
 
         private bool _running;
@@ -63,24 +79,21 @@ namespace Terrain_Scanner_Automation
         {
             while (_running)
             {
-                Console.WriteLine("loop");
                 MoveRightOneBlock();
-                Thread.Sleep(500);
-                MoveLeftOneBlock();
+                //Thread.Sleep(500);
+                //MoveLeftOneBlock();
             }
         }
         
         private void MoveRightOneBlock()
         {
-            Console.WriteLine("Moving right");
-            Console.WriteLine("postmessage " + PostMessage(_minecraftProcess.MainWindowHandle, WM_KEYDOWN, VK_D, 0));
-            Thread.Sleep(2000);
+            
+            Thread.Sleep(100);
             PostMessage(_minecraftProcess.MainWindowHandle, WM_KEYUP, VK_D, 0);
         }
         
         private void MoveLeftOneBlock()
         {
-            Console.WriteLine("Moving left");
             PostMessage(_minecraftProcess.MainWindowHandle, WM_KEYDOWN, VK_A, 0);
             Thread.Sleep(500);
             PostMessage(_minecraftProcess.MainWindowHandle, WM_KEYUP, VK_A, 0);
@@ -88,7 +101,6 @@ namespace Terrain_Scanner_Automation
 
         private void TypeCoordinates()
         {
-            
             PostMessage(_minecraftProcess.MainWindowHandle, WM_KEYDOWN, VK_D, 0);
             Thread.Sleep(500);
             PostMessage(_minecraftProcess.MainWindowHandle, WM_KEYUP, VK_D, 0);
