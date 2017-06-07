@@ -37,6 +37,11 @@ namespace Terrain_Scanner_Automation
             }
 
             _auto = new Automator();
+
+            btnNorth.Enabled = false;
+            btnEast.Enabled = false;
+            btnSouth.Enabled = false;
+            btnWest.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -91,6 +96,12 @@ namespace Terrain_Scanner_Automation
             int z = Int32.Parse(tbStartChunk.Text.Substring(commaPos+1));
             currentChunk = ChunkList.AddChunk(x, z);
             UpdateCurrentChunkLabel();
+            tbStartChunk.Enabled = false;
+            btnSetStartChunk.Enabled = false;
+            btnNorth.Enabled = true;
+            btnEast.Enabled = true;
+            btnSouth.Enabled = true;
+            btnWest.Enabled = true;
         }
 
         private void UpdateCurrentChunkLabel()

@@ -56,9 +56,7 @@
     </Compile>
     <Compile Include="Automator.cs" />
     <Compile Include="ChunkList.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Win32.cs" />
     <EmbeddedResource Include="AutomationDisplay.resx">
       <DependentUpon>AutomationDisplay.cs</DependentUpon>
     </EmbeddedResource>
