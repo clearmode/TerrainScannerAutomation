@@ -70,39 +70,44 @@ namespace Terrain_Scanner_Automation
         private void UseScannerQueue(int x, int z)
         {
             _input.Mouse.RightButtonClick();
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.MoveMouseBy(110, -120);
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.LeftButtonClick();
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.MoveMouseBy(-110, 170);
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.LeftButtonClick();
-            Thread.Sleep(100);
+            Wait();
             _input.Keyboard.TextEntry(x + "," + z);
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.MoveMouseBy(0, -50);
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.LeftButtonClick();
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.MoveMouseBy(-110, -120);
-            Thread.Sleep(100);
+            Wait();
             _input.Mouse.LeftButtonClick();
-            Thread.Sleep(100);
+            Wait();
             _input.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
-            Thread.Sleep(100);
+            Wait();
         }
 
         private void UseTerrainScanner()
         {
             _input.Mouse.RightButtonClick();
-            Thread.Sleep(100);
-            _input.Mouse.MoveMouseBy(0, 80);
-            Thread.Sleep(100);
+            Wait();
+            _input.Mouse.MoveMouseBy(0, 90);
+            Wait();
             _input.Mouse.LeftButtonClick();
-            Thread.Sleep(100);
+            Wait();
             _input.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
-            Thread.Sleep(100);
+            Wait();
+        }
+
+        private void Wait()
+        {
+            Thread.Sleep(150);
         }
         
     }
