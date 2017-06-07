@@ -55,6 +55,7 @@
       <DependentUpon>AutomationDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Automator.cs" />
+    <Compile Include="ChunkList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Win32.cs" />

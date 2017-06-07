@@ -20,6 +20,7 @@ namespace Terrain_Scanner_Automation
         const int START_HOTKEY_ID = 1;
         const int STOP_HOTKEY_ID = 2;
         Automator _auto;
+        ChunkList.Chunk currentChunk;
 
         public AutomationDisplay()
         {
@@ -36,7 +37,6 @@ namespace Terrain_Scanner_Automation
             }
 
             _auto = new Automator();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace Terrain_Scanner_Automation
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == 0x0312 && m.WParam.ToInt32() == START_HOTKEY_ID /*&& _auto.MinecraftProcessID != 0*/)
+            if (m.Msg == 0x0312 && m.WParam.ToInt32() == START_HOTKEY_ID)
             {
                 Console.WriteLine("Start");
                 _auto.Running = true;
@@ -58,6 +58,44 @@ namespace Terrain_Scanner_Automation
             }
 
             base.WndProc(ref m);
+        }
+
+        private void btnNorth_Click(object sender, EventArgs e)
+        {
+            currentChunk = ChunkList.AddChunk(currentChunk.X, currentChunk.Z - 16);
+            UpdateCurrentChunkLabel();
+        }
+
+        private void btnEast_Click(object sender, EventArgs e)
+        {
+            currentChunk = ChunkList.AddChunk(currentChunk.X + 16, currentChunk.Z);
+            UpdateCurrentChunkLabel();
+        }
+
+        private void btnSouth_Click(object sender, EventArgs e)
+        {
+            currentChunk = ChunkList.AddChunk(currentChunk.X, currentChunk.Z + 16);
+            UpdateCurrentChunkLabel();
+        }
+
+        private void btnWest_Click(object sender, EventArgs e)
+        {
+            currentChunk = ChunkList.AddChunk(currentChunk.X - 16, currentChunk.Z);
+            UpdateCurrentChunkLabel();
+        }
+
+        private void btnSetStartChunk_Click(object sender, EventArgs e)
+        {
+            int commaPos = tbStartChunk.Text.IndexOf(',');
+            int x = Int32.Parse(tbStartChunk.Text.Substring(0, commaPos));
+            int z = Int32.Parse(tbStartChunk.Text.Substring(commaPos+1));
+            currentChunk = ChunkList.AddChunk(x, z);
+            UpdateCurrentChunkLabel();
+        }
+
+        private void UpdateCurrentChunkLabel()
+        {
+            lblChunk.Text = currentChunk.X + ", " + currentChunk.Z;
         }
         
     }

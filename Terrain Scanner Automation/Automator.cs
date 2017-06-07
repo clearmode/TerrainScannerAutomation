@@ -38,33 +38,72 @@ namespace Terrain_Scanner_Automation
 
         private void Run()
         {
-            while (_running)
+            ChunkList.Chunk currentChunk;
+
+            while (_running && !(currentChunk = ChunkList.GetAndRemoveFirstChunk()).Equals(null))
             {
+                UseScannerQueue(currentChunk.X, currentChunk.Z);
                 MoveRightOneBlock();
-                Thread.Sleep(500);
+                UseTerrainScanner();
                 MoveLeftOneBlock();
+
+                Thread.Sleep(150000);
             }
+
+            _running = false;
         }
-        
+
         private void MoveRightOneBlock()
         {
             _input.Keyboard.KeyDown(VirtualKeyCode.VK_D);
-            Thread.Sleep(100);
+            Thread.Sleep(250);
             _input.Keyboard.KeyUp(VirtualKeyCode.VK_D);
         }
         
         private void MoveLeftOneBlock()
         {
             _input.Keyboard.KeyDown(VirtualKeyCode.VK_A);
-            Thread.Sleep(100);
+            Thread.Sleep(250);
             _input.Keyboard.KeyUp(VirtualKeyCode.VK_A);
         }
 
-        private void TypeCoordinates()
+        private void UseScannerQueue(int x, int z)
         {
-            
+            _input.Mouse.RightButtonClick();
+            Thread.Sleep(100);
+            _input.Mouse.MoveMouseBy(110, -120);
+            Thread.Sleep(100);
+            _input.Mouse.LeftButtonClick();
+            Thread.Sleep(100);
+            _input.Mouse.MoveMouseBy(-110, 170);
+            Thread.Sleep(100);
+            _input.Mouse.LeftButtonClick();
+            Thread.Sleep(100);
+            _input.Keyboard.TextEntry(x + "," + z);
+            Thread.Sleep(100);
+            _input.Mouse.MoveMouseBy(0, -50);
+            Thread.Sleep(100);
+            _input.Mouse.LeftButtonClick();
+            Thread.Sleep(100);
+            _input.Mouse.MoveMouseBy(-110, -120);
+            Thread.Sleep(100);
+            _input.Mouse.LeftButtonClick();
+            Thread.Sleep(100);
+            _input.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
+            Thread.Sleep(100);
         }
-        
+
+        private void UseTerrainScanner()
+        {
+            _input.Mouse.RightButtonClick();
+            Thread.Sleep(100);
+            _input.Mouse.MoveMouseBy(0, 80);
+            Thread.Sleep(100);
+            _input.Mouse.LeftButtonClick();
+            Thread.Sleep(100);
+            _input.Keyboard.KeyPress(VirtualKeyCode.ESCAPE);
+            Thread.Sleep(100);
+        }
         
     }
 }
