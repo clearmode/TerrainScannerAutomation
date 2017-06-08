@@ -19,8 +19,8 @@ namespace Terrain_Scanner_Automation
         public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
         const int START_HOTKEY_ID = 1;
         const int STOP_HOTKEY_ID = 2;
-        Automator _auto;
-        ChunkList.Chunk currentChunk;
+        private Automator _auto;
+        private ChunkList.Chunk currentChunk;
 
         public AutomationDisplay()
         {

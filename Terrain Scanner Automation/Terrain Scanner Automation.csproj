@@ -7,7 +7,7 @@
     <ProjectGuid>{397C534C-E923-4CCD-8E0B-EF2482EB321A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Terrain_Scanner_Automation</RootNamespace>
-    <AssemblyName>Terrain Scanner Automation</AssemblyName>
+    <AssemblyName>Terrain Scanner Automator</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>TerrainScannerAutomation.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -83,6 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TerrainScannerAutomation.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

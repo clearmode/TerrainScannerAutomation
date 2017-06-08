@@ -8,8 +8,8 @@ namespace Terrain_Scanner_Automation
     public class Automator
     {
         
-        Thread _run;
-        InputSimulator _input;
+        private Thread _run;
+        private InputSimulator _input;
         
 
         public Automator()
