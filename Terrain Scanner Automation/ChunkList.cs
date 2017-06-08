@@ -5,8 +5,10 @@ using System.Linq;
 
 namespace Terrain_Scanner_Automation
 {
-    static class ChunkList
+    public class ChunkList
     {
+        public event EventHandler<EventArgs> RemoveChunk;
+
         public struct Chunk
         {
             public int X { get; private set; }
@@ -24,14 +26,14 @@ namespace Terrain_Scanner_Automation
             }
         }
 
-        public static BindingList<Chunk> Chunks;
+        public BindingList<Chunk> Chunks;
 
-        static ChunkList()
+        public ChunkList()
         {
             Chunks = new BindingList<Chunk>();
         }
 
-        public static Chunk AddChunk(int x, int z)
+        public Chunk AddChunk(int x, int z)
         {
             Chunk chunk = new Chunk(x, z);
 
@@ -44,10 +46,13 @@ namespace Terrain_Scanner_Automation
             return chunk;
         }
 
-        public static Chunk GetAndRemoveFirstChunk()
+        public Chunk GetAndRemoveFirstChunk()
         {
             Chunk chunk = Chunks.FirstOrDefault();
-            Chunks.RemoveAt(0);
+            if (!chunk.Equals(null))
+            {
+                RemoveChunk(this, EventArgs.Empty);
+            }
 
             return chunk;
         }

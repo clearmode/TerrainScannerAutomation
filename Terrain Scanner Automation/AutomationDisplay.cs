@@ -20,6 +20,7 @@ namespace Terrain_Scanner_Automation
         const int START_HOTKEY_ID = 1;
         const int STOP_HOTKEY_ID = 2;
         private Automator _auto;
+        private ChunkList _chunkList;
         private ChunkList.Chunk currentChunk;
 
         public AutomationDisplay()
@@ -36,14 +37,13 @@ namespace Terrain_Scanner_Automation
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
-            _auto = new Automator();
+            _chunkList = new ChunkList();
+            _auto = new Automator(_chunkList);
 
             btnNorth.Enabled = false;
             btnEast.Enabled = false;
             btnSouth.Enabled = false;
             btnWest.Enabled = false;
-
-            Control.CheckForIllegalCrossThreadCalls = false;
 
             dgvChunkQueue.RowHeadersVisible = false;
             dgvChunkQueue.AutoGenerateColumns = false;
@@ -61,7 +61,9 @@ namespace Terrain_Scanner_Automation
                 DataPropertyName = "Z"
             });
 
-            dgvChunkQueue.DataSource = ChunkList.Chunks;
+            dgvChunkQueue.DataSource = _chunkList.Chunks;
+
+            _chunkList.RemoveChunk += new EventHandler<EventArgs>(OnRemoveFirstChunk);
 
         }
 
@@ -88,25 +90,25 @@ namespace Terrain_Scanner_Automation
 
         private void btnNorth_Click(object sender, EventArgs e)
         {
-            currentChunk = ChunkList.AddChunk(currentChunk.X, currentChunk.Z - 16);
+            currentChunk = _chunkList.AddChunk(currentChunk.X, currentChunk.Z - 16);
             UpdateCurrentChunkLabel();
         }
 
         private void btnEast_Click(object sender, EventArgs e)
         {
-            currentChunk = ChunkList.AddChunk(currentChunk.X + 16, currentChunk.Z);
+            currentChunk = _chunkList.AddChunk(currentChunk.X + 16, currentChunk.Z);
             UpdateCurrentChunkLabel();
         }
 
         private void btnSouth_Click(object sender, EventArgs e)
         {
-            currentChunk = ChunkList.AddChunk(currentChunk.X, currentChunk.Z + 16);
+            currentChunk = _chunkList.AddChunk(currentChunk.X, currentChunk.Z + 16);
             UpdateCurrentChunkLabel();
         }
 
         private void btnWest_Click(object sender, EventArgs e)
         {
-            currentChunk = ChunkList.AddChunk(currentChunk.X - 16, currentChunk.Z);
+            currentChunk = _chunkList.AddChunk(currentChunk.X - 16, currentChunk.Z);
             UpdateCurrentChunkLabel();
         }
 
@@ -115,7 +117,7 @@ namespace Terrain_Scanner_Automation
             int commaPos = tbStartChunk.Text.IndexOf(',');
             int x = Int32.Parse(tbStartChunk.Text.Substring(0, commaPos));
             int z = Int32.Parse(tbStartChunk.Text.Substring(commaPos+1));
-            currentChunk = ChunkList.AddChunk(x, z);
+            currentChunk = _chunkList.AddChunk(x, z);
             UpdateCurrentChunkLabel();
             tbStartChunk.Enabled = false;
             btnSetStartChunk.Enabled = false;
@@ -133,7 +135,16 @@ namespace Terrain_Scanner_Automation
 
         private void btnRemoveChunk_Click(object sender, EventArgs e)
         {
-            ChunkList.Chunks.RemoveAt(dgvChunkQueue.CurrentCell.RowIndex);
+            _chunkList.Chunks.RemoveAt(dgvChunkQueue.CurrentCell.RowIndex);
+        }
+        
+
+        private void OnRemoveFirstChunk(object sender, EventArgs e)
+        {
+            BeginInvoke(new MethodInvoker(delegate
+            {
+                _chunkList.Chunks.RemoveAt(0);
+            }));
         }
     }
 }

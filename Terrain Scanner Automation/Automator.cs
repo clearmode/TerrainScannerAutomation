@@ -10,11 +10,13 @@ namespace Terrain_Scanner_Automation
         
         private Thread _run;
         private InputSimulator _input;
+        private ChunkList _chunkList;
         
 
-        public Automator()
+        public Automator(ChunkList chunkList)
         {
             _input = new InputSimulator();
+            _chunkList = chunkList;
         }
 
         private bool _running;
@@ -27,6 +29,7 @@ namespace Terrain_Scanner_Automation
                 {
                     _running = value;
                     _run = new Thread(Run);
+                    _run.IsBackground = true;
                     _run.Start();
                 }
                 else if(_running && !value)
@@ -40,7 +43,7 @@ namespace Terrain_Scanner_Automation
         {
             ChunkList.Chunk currentChunk;
 
-            while (_running && !(currentChunk = ChunkList.GetAndRemoveFirstChunk()).Equals(null))
+            while (_running && !(currentChunk = _chunkList.GetAndRemoveFirstChunk()).Equals(null))
             {
                 UseScannerQueue(currentChunk.X, currentChunk.Z);
                 MoveRightOneBlock();
