@@ -42,10 +42,11 @@ namespace Terrain_Scanner_Automation
             btnEast.Enabled = false;
             btnSouth.Enabled = false;
             btnWest.Enabled = false;
-            /*
+
+            Control.CheckForIllegalCrossThreadCalls = false;
+
             dgvChunkQueue.RowHeadersVisible = false;
             dgvChunkQueue.AutoGenerateColumns = false;
-            dgvChunkQueue.DataSource = ChunkList.Chunks;
             dgvChunkQueue.Columns.Add(new DataGridViewTextBoxColumn
             {
                 HeaderText = "X",
@@ -59,7 +60,9 @@ namespace Terrain_Scanner_Automation
                 Width = 50,
                 DataPropertyName = "Z"
             });
-            */
+
+            dgvChunkQueue.DataSource = ChunkList.Chunks;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
