@@ -18,4 +18,6 @@ Note: the mouse must be on the minecraft client whenever it tries to start the n
 
 5. When the queue has been finished or you press "Numpad 8" the program will stop.
 
+Note: make sure the terrain scanner is set to 8 blocks/t and gets enough power or the timing will be off.
+
 If you have any issues, please share them with me on github.
